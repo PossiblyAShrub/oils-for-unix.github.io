@@ -64,7 +64,7 @@ proc build-one(path) {
         <head>
           <meta name="viewport" content="width=device-width, initial-scale=1">
           <title>$title</title>
-          <link rel="stylesheet" type="text/css" href="/web/base.css" />
+          <link rel="stylesheet" type="text/css" href="../web/base.css" />
         </head>
         <body class="width40">
     """
