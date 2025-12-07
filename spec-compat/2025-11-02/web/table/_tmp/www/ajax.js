@@ -1,1 +1,0 @@
-/home/andy/git/oils-for-unix/oils/web/table/../ajax.js
