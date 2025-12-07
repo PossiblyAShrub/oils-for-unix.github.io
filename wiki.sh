@@ -80,15 +80,6 @@ proc build-one(path) {
     </html>
     """
   }
-
-  : '''
-  ... build/doc.sh render-only
-    <(pre-render-wikilinks <$path)
-    $HTML_BASE_DIR/$name.html
-    "$web_url/base.css $web_url/manual.css $web_url/toc.css $web_url/language.css $web_url/code.css"
-    $title
-  ;
-  '''
 }
 
 proc build() {

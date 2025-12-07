@@ -9,14 +9,37 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
+
+      - name: Install CommonMark
+        run: |
+          sudo apt install cmark
+
+      - name: Install YSH
+        run: |
+          expected="f4d41d20a0523dbcfbd4ba231f82edf25b08d4965d65bc71fcb56666d6743000"
+          wget -qO- "https://oils.pub/download/oils-for-unix-0.37.0.tar.gz" \
+            | tee oils-for-unix-0.37.0.tar.gz \
+            | sha256sum --check <(echo "$expected  -")
+
+          tar -x --gz < oils-for-unix-0.37.0.tar.gz
+          cd oils-for-unix-0.37.0
+
+          ./configure
+          _build/oils.sh
+          sudo ./install
+
       - name: Build Wiki
         run: |
           ./wiki.sh build
           ./wiki.sh remove-wiki  # Don't serve the wiki repo under pages.oils.pub
+
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v4
+        with:
+          path: '.' # upload entire directory
 
   # Following https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
   deploy:
