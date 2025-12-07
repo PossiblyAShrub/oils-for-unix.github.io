@@ -1,0 +1,36 @@
+name: Build and Deploy to Pages
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Build Wiki
+        run: |
+          ./wiki.sh build
+          ./wiki.sh remove-wiki  # Don't serve the wiki repo under pages.oils.pub
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v4
+
+  # Following https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
+  deploy:
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    runs-on: ubuntu-22.04
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{steps.deployment.outputs.page_url}}
+    steps:
+      - name: Deploy artifact
+        id: deployment
+        uses: actions/deploy-pages@v4
+
