@@ -1,53 +1,16 @@
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Running Oils as build shell</title>
+      <!DOCTYPE html>
+      <html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Running Oils as build shell</title>
 
-      <link rel="stylesheet" type="text/css" href="../web/base.css" />
+  <link rel="stylesheet" type="text/css" href="../web/base.css" />
+  <link rel="stylesheet" type="text/css" href="./search.css" />
+</head>
+<body class="width40">
 
-      <style>
-        #search > div {
-          margin-top: 8px;
-          width: 100%;
-        }
-
-        #search input[type=text], #search button {
-          padding: 4px 8px;
-
-          background-color: #EEE;
-          color: #444;
-        }
-
-        /* We cannot control the search UI, so manually calculate widths for sizing */
-        #search input {
-          padding-right: 4px !important; /* Pagefind likes to add a large padding here, disable it */
-
-          width: calc(100%
-                        - max(10%, 50px) /* button width */
-                        - 20px /* margins */);
-
-          border: 1px solid #EEE;
-        }
-
-        #search button {
-          width: calc(max(10%, 50px));
-
-          border: 1px solid #AAA;
-        }
-
-        /* This is the load more results button */
-        #search .pagefind-ui__drawer button {
-          margin-left: 0;
-          margin-right: 0;
-          width: 100%;
-        }
-      </style>
-    </head>
-    <body class="width40">
-
-    <div id="search"></div>
-    <hr>
+<div id="search"></div>
+<hr>
 
 <p>Moved to <a href="Running-Package-Builds-with-OSH.html">Running Package Builds with OSH</a></p>
     <script src="./pagefind/pagefind-ui.js"></script>

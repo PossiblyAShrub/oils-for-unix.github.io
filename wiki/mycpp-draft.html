@@ -1,53 +1,16 @@
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>mycpp draft</title>
+      <!DOCTYPE html>
+      <html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>mycpp draft</title>
 
-      <link rel="stylesheet" type="text/css" href="../web/base.css" />
+  <link rel="stylesheet" type="text/css" href="../web/base.css" />
+  <link rel="stylesheet" type="text/css" href="./search.css" />
+</head>
+<body class="width40">
 
-      <style>
-        #search > div {
-          margin-top: 8px;
-          width: 100%;
-        }
-
-        #search input[type=text], #search button {
-          padding: 4px 8px;
-
-          background-color: #EEE;
-          color: #444;
-        }
-
-        /* We cannot control the search UI, so manually calculate widths for sizing */
-        #search input {
-          padding-right: 4px !important; /* Pagefind likes to add a large padding here, disable it */
-
-          width: calc(100%
-                        - max(10%, 50px) /* button width */
-                        - 20px /* margins */);
-
-          border: 1px solid #EEE;
-        }
-
-        #search button {
-          width: calc(max(10%, 50px));
-
-          border: 1px solid #AAA;
-        }
-
-        /* This is the load more results button */
-        #search .pagefind-ui__drawer button {
-          margin-left: 0;
-          margin-right: 0;
-          width: 100%;
-        }
-      </style>
-    </head>
-    <body class="width40">
-
-    <div id="search"></div>
-    <hr>
+<div id="search"></div>
+<hr>
 
 <h1>Translating Python to C++: Don't Lose the Stack</h1>
 <p><code>mycpp</code> is the MyPy-based Python-to-C++ translator for the Oils shell project. In contrast to other performance-focused Python compilers and interpreters (<a href="https://antocuni.eu/2025/10/29/inside-spy-part-1-motivations-and-goals/">SPy</a>, CPython, PyPy), it trades off generality for speed in an extreme manner - we only ever intend to compile a single project with it, and are willing to change the source code to simplify the translation.</p>
