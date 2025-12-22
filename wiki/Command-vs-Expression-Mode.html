@@ -3,9 +3,51 @@
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Command vs Expression Mode</title>
+
       <link rel="stylesheet" type="text/css" href="../web/base.css" />
+
+      <style>
+        #search > div {
+          margin-top: 8px;
+          width: 100%;
+        }
+
+        #search input[type=text], #search button {
+          padding: 4px 8px;
+
+          background-color: #EEE;
+          color: #444;
+        }
+
+        /* We cannot control the search UI, so manually calculate widths for sizing */
+        #search input {
+          padding-right: 4px !important; /* Pagefind likes to add a large padding here, disable it */
+
+          width: calc(100%
+                        - max(10%, 50px) /* button width */
+                        - 20px /* margins */);
+
+          border: 1px solid #EEE;
+        }
+
+        #search button {
+          width: calc(max(10%, 50px));
+
+          border: 1px solid #AAA;
+        }
+
+        /* This is the load more results button */
+        #search .pagefind-ui__drawer button {
+          margin-left: 0;
+          margin-right: 0;
+          width: 100%;
+        }
+      </style>
     </head>
     <body class="width40">
+
+    <div id="search"></div>
+    <hr>
 
 <p>Oil: <a href="http://www.oilshell.org/release/latest/doc/command-vs-expression-mode.html">http://www.oilshell.org/release/latest/doc/command-vs-expression-mode.html</a></p>
 <p>elvish: Prefix syntax for arithmetic.  So there's only one mode?  Code can get lispy because () is command substitution.</p>
@@ -30,6 +72,12 @@
 <p><em>By default, Mash is in &quot;regular Mash&quot; mode. If a command line starts or ends with !, the entire line is interpreted as a Mish command. If ! is issued by itself as a command, then Mash toggles into Mish by default, and the prompt changes from a $ to a !.</em></p>
 <p><a href="Neugram-Shell%7Chttps://github.com/neugram/ng/blob/master/docs/shell.md.html">Neugram Shell|https://github.com/neugram/ng/blob/master/docs/shell.md</a> (Go-based, implemented in Go)</p>
 <p><em>A $$ ... $$ expression in Neugram is a sequence of shell commands. If used as a top-level statement in the interpreter, commands are executed as they are parsed. Otherwise, shell commands are executed when the $$-expression is evaluated according to standard Neugram rules.</em></p>
+    <script src="./pagefind/pagefind-ui.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            new PagefindUI({ element: "#search", showSubResults: true });
+        });
+    </script>
   </body>
 </html>
 

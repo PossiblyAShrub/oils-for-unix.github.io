@@ -3,20 +3,71 @@
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Dev Guide</title>
+
       <link rel="stylesheet" type="text/css" href="../web/base.css" />
+
+      <style>
+        #search > div {
+          margin-top: 8px;
+          width: 100%;
+        }
+
+        #search input[type=text], #search button {
+          padding: 4px 8px;
+
+          background-color: #EEE;
+          color: #444;
+        }
+
+        /* We cannot control the search UI, so manually calculate widths for sizing */
+        #search input {
+          padding-right: 4px !important; /* Pagefind likes to add a large padding here, disable it */
+
+          width: calc(100%
+                        - max(10%, 50px) /* button width */
+                        - 20px /* margins */);
+
+          border: 1px solid #EEE;
+        }
+
+        #search button {
+          width: calc(max(10%, 50px));
+
+          border: 1px solid #AAA;
+        }
+
+        /* This is the load more results button */
+        #search .pagefind-ui__drawer button {
+          margin-left: 0;
+          margin-right: 0;
+          width: 100%;
+        }
+      </style>
     </head>
     <body class="width40">
 
+    <div id="search"></div>
+    <hr>
+
+<p>If you want to fix or enhance Oils, this is where to start!</p>
 <h2>Table of Contents</h2>
 <ul>
-<li><a href="Contributing.html">Contributing</a>
+<li><a href="Contributing.html">Contributing</a> - setting up your dev environment
 <ul>
 <li><a href="Making-Pull-Requests.html">Making Pull Requests</a></li>
-<li><a href="AI-Contribution-Policy.html">AI Contribution Policy</a></li>
+<li><a href="Spec-Tests.html">Spec Tests</a> are essential for design and implementation</li>
 </ul>
 </li>
+<li><a href="Oils-Dev-Cheat-Sheet.html">Oils Dev Cheat Sheet</a> - a concise list of commands you may want to run</li>
 <li><a href="Fourth-Grant-Goals-and-Guidelines.html">Fourth Grant Goals and Guidelines</a></li>
-<li><a href="Oils-Dev-Cheat-Sheet.html">Oils Dev Cheat Sheet</a></li>
+<li>Tips
+<ul>
+<li><a href="Process-Tracing-Tips-and-Tools.html">Process Tracing Tips and Tools</a></li>
+<li><a href="Tips-on-Reducing-Bugs-to-Small-Test-Cases.html">Tips on Reducing Bugs to Small Test Cases</a></li>
+<li><a href="Git-Tips%7CGitTips.html">Git Tips|GitTips</a> -- Patterns for using Git on this project.</li>
+</ul>
+</li>
+<li><a href="AI-Contribution-Policy.html">AI Contribution Policy</a></li>
 </ul>
 <h2>Blog Posts by Contributors</h2>
 <ul>
@@ -30,25 +81,14 @@
 </ul>
 <p>TODO: Link to your posts here</p>
 <h2>To Sort Through</h2>
+<p>Some of these pages may be old:</p>
 <ul>
-<li><a href="Contributing.html">Contributing</a> / <a href="Spec-Tests.html">Spec Tests</a>
-<ul>
-<li><a href="Oils-Dev-Cheat-Sheet.html">Oils Dev Cheat Sheet</a> -- useful!</li>
 <li><a href="Oil-Ninja-Build.html">Oil Ninja Build</a></li>
 <li><a href="Oil-Native-Quick-Start.html">Oil Native Quick Start</a></li>
 <li>OLD: <a href="Developing-Oil-With-Nix.html">Developing Oil With Nix</a></li>
-</ul>
-</li>
 <li><a href="Where-Contributors-Have-Problems.html">Where Contributors Have Problems</a> - initially written 2022
 <ul>
-<li><a href="October-2025-Posting.html">October 2025 Posting</a></li>
-</ul>
-</li>
-<li>Tips
-<ul>
-<li><a href="Process-Tracing-Tips-and-Tools.html">Process Tracing Tips and Tools</a></li>
-<li><a href="Tips-on-Reducing-Bugs-to-Small-Test-Cases.html">Tips on Reducing Bugs to Small Test Cases</a></li>
-<li><a href="Git-Tips%7CGitTips.html">Git Tips|GitTips</a> -- Patterns for using Git on this project.</li>
+<li><a href="October-2025-Posting.html">October 2025 Posting</a> / <a href="October-2025-Reply.html">October 2025 Reply</a></li>
 </ul>
 </li>
 <li><a href="Soil.html">Soil</a> our CI</li>
@@ -68,6 +108,12 @@
 <li><a href="Running-Package-Builds-with-OSH.html">Running Package Builds with OSH</a></li>
 <li><a href="Research-Questions.html">Research Questions</a></li>
 </ul>
+    <script src="./pagefind/pagefind-ui.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            new PagefindUI({ element: "#search", showSubResults: true });
+        });
+    </script>
   </body>
 </html>
 

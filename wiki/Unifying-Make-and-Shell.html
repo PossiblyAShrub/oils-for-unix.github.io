@@ -3,9 +3,51 @@
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Unifying Make and Shell</title>
+
       <link rel="stylesheet" type="text/css" href="../web/base.css" />
+
+      <style>
+        #search > div {
+          margin-top: 8px;
+          width: 100%;
+        }
+
+        #search input[type=text], #search button {
+          padding: 4px 8px;
+
+          background-color: #EEE;
+          color: #444;
+        }
+
+        /* We cannot control the search UI, so manually calculate widths for sizing */
+        #search input {
+          padding-right: 4px !important; /* Pagefind likes to add a large padding here, disable it */
+
+          width: calc(100%
+                        - max(10%, 50px) /* button width */
+                        - 20px /* margins */);
+
+          border: 1px solid #EEE;
+        }
+
+        #search button {
+          width: calc(max(10%, 50px));
+
+          border: 1px solid #AAA;
+        }
+
+        /* This is the load more results button */
+        #search .pagefind-ui__drawer button {
+          margin-left: 0;
+          margin-right: 0;
+          width: 100%;
+        }
+      </style>
     </head>
     <body class="width40">
+
+    <div id="search"></div>
+    <hr>
 
 <ul>
 <li>Back: to <a href="ExternalResources.html">ExternalResources</a></li>
@@ -30,6 +72,12 @@
 </li>
 </ul>
 <p>I also ranted a bit in <a href="this-comment-thread%7Chttps://lobste.rs/s/azldgm/oil_comments_about_shell_awk_make.html">this comment thread|https://lobste.rs/s/azldgm/oil_comments_about_shell_awk_make</a> about the overlap between Make and shell.  And what I want from a build tool (build variants to support performance, security, correctness, etc.)</p>
+    <script src="./pagefind/pagefind-ui.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            new PagefindUI({ element: "#search", showSubResults: true });
+        });
+    </script>
   </body>
 </html>
 

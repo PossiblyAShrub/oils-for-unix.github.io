@@ -3,9 +3,51 @@
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Structured Data Over Pipes</title>
+
       <link rel="stylesheet" type="text/css" href="../web/base.css" />
+
+      <style>
+        #search > div {
+          margin-top: 8px;
+          width: 100%;
+        }
+
+        #search input[type=text], #search button {
+          padding: 4px 8px;
+
+          background-color: #EEE;
+          color: #444;
+        }
+
+        /* We cannot control the search UI, so manually calculate widths for sizing */
+        #search input {
+          padding-right: 4px !important; /* Pagefind likes to add a large padding here, disable it */
+
+          width: calc(100%
+                        - max(10%, 50px) /* button width */
+                        - 20px /* margins */);
+
+          border: 1px solid #EEE;
+        }
+
+        #search button {
+          width: calc(max(10%, 50px));
+
+          border: 1px solid #AAA;
+        }
+
+        /* This is the load more results button */
+        #search .pagefind-ui__drawer button {
+          margin-left: 0;
+          margin-right: 0;
+          width: 100%;
+        }
+      </style>
     </head>
     <body class="width40">
+
+    <div id="search"></div>
+    <hr>
 
 <p>Up: <a href="Structured-Data-in-Oil.html">Structured Data in Oil</a></p>
 <p>Takeaway from http://www.oilshell.org/blog/2017/09/19.html</p>
@@ -56,6 +98,12 @@
 <li>Haskell ?</li>
 </ul>
 <p>I don't think Julia has it.</p>
+    <script src="./pagefind/pagefind-ui.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            new PagefindUI({ element: "#search", showSubResults: true });
+        });
+    </script>
   </body>
 </html>
 

@@ -3,9 +3,51 @@
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Tips on Using pgen2</title>
+
       <link rel="stylesheet" type="text/css" href="../web/base.css" />
+
+      <style>
+        #search > div {
+          margin-top: 8px;
+          width: 100%;
+        }
+
+        #search input[type=text], #search button {
+          padding: 4px 8px;
+
+          background-color: #EEE;
+          color: #444;
+        }
+
+        /* We cannot control the search UI, so manually calculate widths for sizing */
+        #search input {
+          padding-right: 4px !important; /* Pagefind likes to add a large padding here, disable it */
+
+          width: calc(100%
+                        - max(10%, 50px) /* button width */
+                        - 20px /* margins */);
+
+          border: 1px solid #EEE;
+        }
+
+        #search button {
+          width: calc(max(10%, 50px));
+
+          border: 1px solid #AAA;
+        }
+
+        /* This is the load more results button */
+        #search .pagefind-ui__drawer button {
+          margin-left: 0;
+          margin-right: 0;
+          width: 100%;
+        }
+      </style>
     </head>
     <body class="width40">
+
+    <div id="search"></div>
+    <hr>
 
 <p>Back: <a href="Implementing-the-Oil-Expression-Language.html">Implementing the Oil Expression Language</a></p>
 <p>pgen2 is the LL parser generator borrowed from Python, used for recognizing the Oil expression language (which is based on Python).  Caveat: it's a bit hard to use!!!</p>
@@ -15,6 +57,12 @@
 <li>In <code>oil_lang/expr_to_ast.py</code>, make sure you copy the relevant productions into comments.  That will make it easier to write the &quot;transformer&quot;.</li>
 <li>See <code>opy/compiler2/transformer.py</code> for &quot;tips&quot; on transforming rules to AST nodes.  However, note that we have the &quot;singleton-collapse&quot; rule which OPy doesn't have.  Ping me for details if you don't understand this.</li>
 </ol>
+    <script src="./pagefind/pagefind-ui.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            new PagefindUI({ element: "#search", showSubResults: true });
+        });
+    </script>
   </body>
 </html>
 

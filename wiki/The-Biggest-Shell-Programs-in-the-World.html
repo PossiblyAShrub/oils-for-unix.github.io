@@ -3,9 +3,51 @@
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>The Biggest Shell Programs in the World</title>
+
       <link rel="stylesheet" type="text/css" href="../web/base.css" />
+
+      <style>
+        #search > div {
+          margin-top: 8px;
+          width: 100%;
+        }
+
+        #search input[type=text], #search button {
+          padding: 4px 8px;
+
+          background-color: #EEE;
+          color: #444;
+        }
+
+        /* We cannot control the search UI, so manually calculate widths for sizing */
+        #search input {
+          padding-right: 4px !important; /* Pagefind likes to add a large padding here, disable it */
+
+          width: calc(100%
+                        - max(10%, 50px) /* button width */
+                        - 20px /* margins */);
+
+          border: 1px solid #EEE;
+        }
+
+        #search button {
+          width: calc(max(10%, 50px));
+
+          border: 1px solid #AAA;
+        }
+
+        /* This is the load more results button */
+        #search .pagefind-ui__drawer button {
+          margin-left: 0;
+          margin-right: 0;
+          width: 100%;
+        }
+      </style>
     </head>
     <body class="width40">
+
+    <div id="search"></div>
+    <hr>
 
 <p>Help me fill out this page!  It's freely editable.</p>
 <p>What programs should be listed?  I'm using &quot;biggest&quot; in the sense of <strong>substantial</strong>, not necessarily the raw number of lines.</p>
@@ -112,6 +154,12 @@
 <p><a href="https://yossarian.net/til/post/some-surprising-code-execution-sources-in-bash/">shell script are dangerous</a> The shell is a program to handle your system internally via an interactive console(or not)... It's feature full and extremely dangerous. it's not done to produce applications.</p>
 </li>
 </ul>
+    <script src="./pagefind/pagefind-ui.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            new PagefindUI({ element: "#search", showSubResults: true });
+        });
+    </script>
   </body>
 </html>
 

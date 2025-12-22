@@ -3,15 +3,63 @@
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Soil</title>
+
       <link rel="stylesheet" type="text/css" href="../web/base.css" />
+
+      <style>
+        #search > div {
+          margin-top: 8px;
+          width: 100%;
+        }
+
+        #search input[type=text], #search button {
+          padding: 4px 8px;
+
+          background-color: #EEE;
+          color: #444;
+        }
+
+        /* We cannot control the search UI, so manually calculate widths for sizing */
+        #search input {
+          padding-right: 4px !important; /* Pagefind likes to add a large padding here, disable it */
+
+          width: calc(100%
+                        - max(10%, 50px) /* button width */
+                        - 20px /* margins */);
+
+          border: 1px solid #EEE;
+        }
+
+        #search button {
+          width: calc(max(10%, 50px));
+
+          border: 1px solid #AAA;
+        }
+
+        /* This is the load more results button */
+        #search .pagefind-ui__drawer button {
+          margin-left: 0;
+          margin-right: 0;
+          width: 100%;
+        }
+      </style>
     </head>
     <body class="width40">
+
+    <div id="search"></div>
+    <hr>
 
 <p>Soil is a shell program that runs Oil's CI across multiple build services.  See the <a href="https://github.com/oilshell/oil/tree/master/soil"><code>soil/</code> dir</a> in the repo.</p>
 <p>TODO: Describe this more thoroughly.</p>
 <p>Home page: <a href="https://op.oils.pub/">https://op.oils.pub/</a> (URL will change)</p>
 <p>Related Blog Post: https://www.oilshell.org/blog/2021/04/build-ci-comments.html</p>
 <p>Old docs: <a href="Travis-CI-For-Oil.html">Travis CI For Oil</a>.</p>
+    <script src="./pagefind/pagefind-ui.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            new PagefindUI({ element: "#search", showSubResults: true });
+        });
+    </script>
   </body>
 </html>
 

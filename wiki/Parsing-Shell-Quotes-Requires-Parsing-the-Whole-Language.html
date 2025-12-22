@@ -3,9 +3,51 @@
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Parsing Shell Quotes Requires Parsing the Whole Language</title>
+
       <link rel="stylesheet" type="text/css" href="../web/base.css" />
+
+      <style>
+        #search > div {
+          margin-top: 8px;
+          width: 100%;
+        }
+
+        #search input[type=text], #search button {
+          padding: 4px 8px;
+
+          background-color: #EEE;
+          color: #444;
+        }
+
+        /* We cannot control the search UI, so manually calculate widths for sizing */
+        #search input {
+          padding-right: 4px !important; /* Pagefind likes to add a large padding here, disable it */
+
+          width: calc(100%
+                        - max(10%, 50px) /* button width */
+                        - 20px /* margins */);
+
+          border: 1px solid #EEE;
+        }
+
+        #search button {
+          width: calc(max(10%, 50px));
+
+          border: 1px solid #AAA;
+        }
+
+        /* This is the load more results button */
+        #search .pagefind-ui__drawer button {
+          margin-left: 0;
+          margin-right: 0;
+          width: 100%;
+        }
+      </style>
     </head>
     <body class="width40">
+
+    <div id="search"></div>
+    <hr>
 
 <p>This is example has <strong>four double quotes</strong>.  To determine whether it means <code>OPEN OPEN CLOSE CLOSE</code> or <code>OPEN CLOSE OPEN CLOSE</code> requires a full shell parser.</p>
 <pre><code>$ echo &quot;foo ${myvar:-&quot;$(f() { echo func-defined-inside-quotes-and-inside-arg; }; f)&quot;} bar&quot;
@@ -17,6 +59,12 @@ foo x bar
 </code></pre>
 <p>3/2020 edit: Although I guess you do not have to parse <code>f() { }</code> in order to figure out that the first <code>&quot;</code> is OPEN.  You only have to understand that <code>${</code> is not closed yet, which is not that hard I suppose.</p>
 <p>TODO: Come up with some harder cases.</p>
+    <script src="./pagefind/pagefind-ui.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            new PagefindUI({ element: "#search", showSubResults: true });
+        });
+    </script>
   </body>
 </html>
 

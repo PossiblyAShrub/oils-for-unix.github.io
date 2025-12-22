@@ -3,9 +3,51 @@
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>ExternalResources</title>
+
       <link rel="stylesheet" type="text/css" href="../web/base.css" />
+
+      <style>
+        #search > div {
+          margin-top: 8px;
+          width: 100%;
+        }
+
+        #search input[type=text], #search button {
+          padding: 4px 8px;
+
+          background-color: #EEE;
+          color: #444;
+        }
+
+        /* We cannot control the search UI, so manually calculate widths for sizing */
+        #search input {
+          padding-right: 4px !important; /* Pagefind likes to add a large padding here, disable it */
+
+          width: calc(100%
+                        - max(10%, 50px) /* button width */
+                        - 20px /* margins */);
+
+          border: 1px solid #EEE;
+        }
+
+        #search button {
+          width: calc(max(10%, 50px));
+
+          border: 1px solid #AAA;
+        }
+
+        /* This is the load more results button */
+        #search .pagefind-ui__drawer button {
+          margin-left: 0;
+          margin-right: 0;
+          width: 100%;
+        }
+      </style>
     </head>
     <body class="width40">
+
+    <div id="search"></div>
+    <hr>
 
 <h2>Links to Unix Shells, Languages, Libraries, Implementations, Research, and More</h2>
 <p> </p>
@@ -100,6 +142,12 @@
 <li><a href="libc-manual:-Implementing-a-Job-Control-Shell%7Chttps://www.gnu.org/software/libc/manual/html_node/Implementing-a-Shell.html.html">libc manual: Implementing a Job Control Shell|https://www.gnu.org/software/libc/manual/html_node/Implementing-a-Shell.html</a></li>
 <li><a href="Notes-on-coprocesses%7Chttp://www.ict.griffith.edu.au/anthony/info/co-processing/general_hints.txt.html">Notes on coprocesses|http://www.ict.griffith.edu.au/anthony/info/co-processing/general_hints.txt</a></li>
 </ul>
+    <script src="./pagefind/pagefind-ui.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            new PagefindUI({ element: "#search", showSubResults: true });
+        });
+    </script>
   </body>
 </html>
 

@@ -3,9 +3,51 @@
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Migration Guide</title>
+
       <link rel="stylesheet" type="text/css" href="../web/base.css" />
+
+      <style>
+        #search > div {
+          margin-top: 8px;
+          width: 100%;
+        }
+
+        #search input[type=text], #search button {
+          padding: 4px 8px;
+
+          background-color: #EEE;
+          color: #444;
+        }
+
+        /* We cannot control the search UI, so manually calculate widths for sizing */
+        #search input {
+          padding-right: 4px !important; /* Pagefind likes to add a large padding here, disable it */
+
+          width: calc(100%
+                        - max(10%, 50px) /* button width */
+                        - 20px /* margins */);
+
+          border: 1px solid #EEE;
+        }
+
+        #search button {
+          width: calc(max(10%, 50px));
+
+          border: 1px solid #AAA;
+        }
+
+        /* This is the load more results button */
+        #search .pagefind-ui__drawer button {
+          margin-left: 0;
+          margin-right: 0;
+          width: 100%;
+        }
+      </style>
     </head>
     <body class="width40">
+
+    <div id="search"></div>
+    <hr>
 
 <p>(work in progress)</p>
 <p>NEWER: <a href="Gradually-Upgrading-Shell-to-YSH.html">Gradually Upgrading Shell to YSH</a> (TODO: Consolidate these)</p>
@@ -31,6 +73,12 @@
 <p>I filed issue #297 <a href="https://github.com/oilshell/oil/issues/297">Runs the bats test framework</a> because bats appears to be pretty popular.  (Although I'd also like OSH to have some simpler test framework builtin.  That is, some simple &quot;batteries&quot; should be included.)</p>
 <h3>Having Problems?</h3>
 <p>Start a thread on <code>#oil-discuss</code> on https://oilshell.zulipchat.com/ (log in with Github).</p>
+    <script src="./pagefind/pagefind-ui.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            new PagefindUI({ element: "#search", showSubResults: true });
+        });
+    </script>
   </body>
 </html>
 

@@ -3,9 +3,51 @@
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Implementer Lore About Garbage Collection</title>
+
       <link rel="stylesheet" type="text/css" href="../web/base.css" />
+
+      <style>
+        #search > div {
+          margin-top: 8px;
+          width: 100%;
+        }
+
+        #search input[type=text], #search button {
+          padding: 4px 8px;
+
+          background-color: #EEE;
+          color: #444;
+        }
+
+        /* We cannot control the search UI, so manually calculate widths for sizing */
+        #search input {
+          padding-right: 4px !important; /* Pagefind likes to add a large padding here, disable it */
+
+          width: calc(100%
+                        - max(10%, 50px) /* button width */
+                        - 20px /* margins */);
+
+          border: 1px solid #EEE;
+        }
+
+        #search button {
+          width: calc(max(10%, 50px));
+
+          border: 1px solid #AAA;
+        }
+
+        /* This is the load more results button */
+        #search .pagefind-ui__drawer button {
+          margin-left: 0;
+          margin-right: 0;
+          width: 100%;
+        }
+      </style>
     </head>
     <body class="width40">
+
+    <div id="search"></div>
+    <hr>
 
 <p>&quot;Implementer lore&quot; means &quot;programming techniques that are only in a few experienced people's heads!&quot;</p>
 <p>It's not in textbooks.  I've found that there is a lot of it with respect to implementing garbage collectors.  The algorithms are one thing, but there are many nontrivial problems in the implementation.  It interacts with the host language a lot, which is usually C, C++, or Assembly.</p>
@@ -27,6 +69,12 @@
 <li><a href="https://github.com/elliottslaughter/rust-gc-talk">High Performance Garbage Collection in Rust</a> from Elliot Slaughter</li>
 </ul>
 <p>Lore on another topic: <a href="Implementing-Debuggers.html">Implementing Debuggers</a></p>
+    <script src="./pagefind/pagefind-ui.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            new PagefindUI({ element: "#search", showSubResults: true });
+        });
+    </script>
   </body>
 </html>
 

@@ -3,9 +3,51 @@
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>OSH Word Evaluation Algorithm</title>
+
       <link rel="stylesheet" type="text/css" href="../web/base.css" />
+
+      <style>
+        #search > div {
+          margin-top: 8px;
+          width: 100%;
+        }
+
+        #search input[type=text], #search button {
+          padding: 4px 8px;
+
+          background-color: #EEE;
+          color: #444;
+        }
+
+        /* We cannot control the search UI, so manually calculate widths for sizing */
+        #search input {
+          padding-right: 4px !important; /* Pagefind likes to add a large padding here, disable it */
+
+          width: calc(100%
+                        - max(10%, 50px) /* button width */
+                        - 20px /* margins */);
+
+          border: 1px solid #EEE;
+        }
+
+        #search button {
+          width: calc(max(10%, 50px));
+
+          border: 1px solid #AAA;
+        }
+
+        /* This is the load more results button */
+        #search .pagefind-ui__drawer button {
+          margin-left: 0;
+          margin-right: 0;
+          width: 100%;
+        }
+      </style>
     </head>
     <body class="width40">
+
+    <div id="search"></div>
+    <hr>
 
 <p><strong>OBSOLETE</strong>, See <a href="http://oils.pub/release/latest/doc/simple-word-eval.html">http://oils.pub/release/latest/doc/simple-word-eval.html</a></p>
 <p>This page documents a portion of the OSH implementation.  It differs significantly from other shells in this respect.</p>
@@ -93,6 +135,12 @@ hit TAB.</li>
 <li>Dynamically parsed globs are a mistake (just like dynamically parsed arithmetic is).  Shell already has <code>eval</code>, so you lose nothing by making globs static.</li>
 </ul>
 <p>The Oil language will statically parse globs, and I may add something like <code>shopt -s static-glob</code> to OSH in the short term.</p>
+    <script src="./pagefind/pagefind-ui.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            new PagefindUI({ element: "#search", showSubResults: true });
+        });
+    </script>
   </body>
 </html>
 
